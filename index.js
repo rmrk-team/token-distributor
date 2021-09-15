@@ -1,4 +1,5 @@
 import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
+import { cryptoWaitReady } from "@polkadot/util-crypto";
 import { snapshot } from "./tokens.js";
 import { PHRASE, CHAIN } from "./.env.js";
 import { sleep, floatToBigInt } from "./util.js";
@@ -11,11 +12,12 @@ const wsProvider = new WsProvider(
 );
 console.log("Will connect to " + CHAIN);
 
-const keyring = new Keyring({ type: "sr25519" });
-const signerAccount = keyring.addFromUri(PHRASE);
 let amountKusama = CHAIN != "live" ? 150000000000000 : 5333333;
 
 const start = async function start() {
+  await cryptoWaitReady();
+  const keyring = new Keyring({ type: "sr25519" });
+  const signerAccount = keyring.addFromUri(PHRASE);
   const api = await ApiPromise.create({ provider: wsProvider });
   // ----------------------------- SANITY CHECK -----------------------
   console.log("Conducting sanity check");
