@@ -1,0 +1,10 @@
+{
+  "name": "token-dist",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@polkadot/api": "^5.9.1"
+  }
+}
