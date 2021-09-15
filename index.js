@@ -11,12 +11,12 @@ const wsProvider = new WsProvider(
 );
 console.log("Will connect to " + CHAIN);
 
-const api = await ApiPromise.create({ provider: wsProvider });
 const keyring = new Keyring({ type: "sr25519" });
 const signerAccount = keyring.addFromUri(PHRASE);
 let amountKusama = CHAIN == "local" ? 150000000000000 : 5333333;
 
 const start = async function start() {
+  const api = await ApiPromise.create({ provider: wsProvider });
   // ----------------------------- SANITY CHECK -----------------------
   console.log("Conducting sanity check");
   // Check the total sum in the snapshot in float and BigInt
