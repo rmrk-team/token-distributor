@@ -13,7 +13,7 @@ console.log("Will connect to " + CHAIN);
 
 const keyring = new Keyring({ type: "sr25519" });
 const signerAccount = keyring.addFromUri(PHRASE);
-let amountKusama = CHAIN == "local" ? 150000000000000 : 5333333;
+let amountKusama = CHAIN != "live" ? 150000000000000 : 5333333;
 
 const start = async function start() {
   const api = await ApiPromise.create({ provider: wsProvider });
